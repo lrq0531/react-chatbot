@@ -1,12 +1,8 @@
-import React from 'react';
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import EditMessage from './EditMessage'
 import SendMessage from './SendMessage'
-
-// var ss = function() {
-//   alert('ssss')
-// }
 
 const Cockpit = props => (
   <div>
