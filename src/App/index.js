@@ -8,9 +8,9 @@ class App extends React.Component {
 
   render = () => (
     <div>
-      <FriendsList/>
-      <Conversations/>
-      <Cockpit/>
+      <FriendsList />
+      <Conversations />
+      <Cockpit />
     </div>
   )
 }
