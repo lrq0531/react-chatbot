@@ -9,6 +9,7 @@ const Cockpit = props => (
     <EditMessage
       messageValue={props.messageValue}
       onChangeMessage={props.onChangeMessage}
+      clearInputAfterEnter = {props.clearInputAfterEnter}
     />
     <SendMessage
       onClickSendMessage = {props.onClickSendMessage}
