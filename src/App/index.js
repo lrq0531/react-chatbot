@@ -10,8 +10,10 @@ class App extends React.Component {
     super(props)
     this.state = {
       messageValue : 'Start chatting',
-      myDisplayMessages : [],
-      actionType : ''
+      messageToDisplay : '',
+      actionType : '',
+      friend : 'Alex',
+      speaker : '',
     }
   }
 
@@ -26,13 +28,44 @@ class App extends React.Component {
   }
 
   onClickSendMessage = () => {
-    const newMessageFromMe = this.state.messageValue
     this.setState(
       {
         ...this.state,
         messageValue : '',
+        messageToDisplay : this.state.messageValue,
         actionType : 'confirmed',
-        myDisplayMessages : [...this.state.myDisplayMessages, newMessageFromMe]
+        speaker : 'me',
+      }
+    )
+  }
+
+  onClickFriend = (event) => {
+    this.setState(
+      {
+        ...this.state,
+        friend : event.target.textContent,
+        messageToDisplay : '',
+      }
+    )
+  }
+
+  onAddNewFriend = () => {
+    this.setState(
+      {
+        ...this.state,
+        friend : 'Bill.G',
+        messageToDisplay : '',
+      }
+    )
+  }
+
+  receiveMessageFromFriend = (message) => {
+    this.setState(
+      {
+        ...this.state,
+        messageToDisplay : message,
+        actionType : 'confirmed',
+        speaker : this.state.friend,
       }
     )
   }
@@ -41,14 +74,22 @@ class App extends React.Component {
     if (event.key === 'Enter') {
       this.onClickSendMessage()
     }
+    else if (event.key === 'Control') {
+      this.receiveMessageFromFriend('Such a fun, React.')
+    }
   }
 
   render = () => (
     <div>
-      <FriendsList />
+      <FriendsList
+        onAddNewFriend = {this.onAddNewFriend}
+        onClickFriend = {this.onClickFriend}
+      />
       <Conversations
-        myDisplayMessages = {this.state.myDisplayMessages}
+        newMessage = {this.state.messageToDisplay}
         actionType = {this.state.actionType}
+        friend = {this.state.friend}
+        speaker = {this.state.speaker}
       />
       <Cockpit
         messageValue = {this.state.messageValue}
