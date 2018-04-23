@@ -16,13 +16,15 @@ class EditMessage extends React.Component {
     this.inputRef.current.removeEventListener('keyup')
   }
 
-  render = () => (
-    <input
-      ref={this.inputRef}
-      value={this.props.messageValue}
-      onChange={this.props.onChangeMessage}
-    />
-  )
+  render() {
+    return (
+      <input
+        ref={this.inputRef}
+        value={this.props.messageValue}
+        onChange={this.props.onChangeMessage}
+      />
+    )
+  }
 }
 
 EditMessage.propTypes = {

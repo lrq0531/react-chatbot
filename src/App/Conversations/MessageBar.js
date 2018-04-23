@@ -1,15 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const fontColor = speaker => (speaker === 'me' ? 'blue' : 'purple')
+const MessageBar = props => {
+  const style = {
+    color: (props.speaker === 'me' ? 'blue' : 'purple'),
+    fontsize: '32px',
+  }
 
-const MessageBar = props => (
-  <div>
-    <font size="6" color={fontColor(props.speaker)}>
+  return (
+    <p style={style}>
       {props.speaker} : {props.displayMessage}
-    </font>
-  </div>
-)
+    </p>
+  )
+}
 
 MessageBar.propTypes = {
   displayMessage: PropTypes.string.isRequired,
