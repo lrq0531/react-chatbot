@@ -10,7 +10,7 @@ const SendMessage = ({ onClickSendMessage }) => (
 )
 
 SendMessage.propTypes = {
-  onClickSendMessage : PropTypes.func.isRequired,
+  onClickSendMessage: PropTypes.func.isRequired,
 }
 
 export default SendMessage

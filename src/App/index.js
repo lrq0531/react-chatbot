@@ -1,80 +1,73 @@
-import React from 'react';
+import React from 'react'
 
 import Cockpit from './Cockpit'
 import Conversations from './Conversations'
 import FriendsList from './FriendsList'
 
 class App extends React.Component {
-
-  constructor( props ) {
+  constructor(props) {
     super(props)
     this.state = {
-      messageValue : 'Start chatting',
-      messageToDisplay : '',
-      actionType : '',
-      friend : 'Alex',
-      speaker : '',
+      messageValue: 'Start chatting',
+      messageToDisplay: '',
+      actionType: '',
+      friend: 'Alex',
+      speaker: '',
     }
   }
 
-  onChangeMessage = (event) => {
+  onChangeMessage = event => {
     this.setState(
       {
-        ...this.state,
-        messageValue : event.target.value,
-        actionType : 'typing',
-      }
+        messageValue: event.target.value,
+        actionType: 'typing',
+      },
     )
   }
 
   onClickSendMessage = () => {
     this.setState(
       {
-        ...this.state,
-        messageValue : '',
-        messageToDisplay : this.state.messageValue,
-        actionType : 'confirmed',
-        speaker : 'me',
-      }
+        messageValue: '',
+        messageToDisplay: this.state.messageValue,
+        actionType: 'confirmed',
+        speaker: 'me',
+      },
     )
   }
 
-  onClickFriend = (event) => {
+  onClickFriend = event => {
     this.setState(
       {
-        ...this.state,
-        friend : event.target.textContent,
-        messageToDisplay : '',
-      }
+        friend: event.target.textContent,
+        messageToDisplay: '',
+      },
     )
   }
 
   onAddNewFriend = () => {
     this.setState(
       {
-        ...this.state,
-        friend : 'Bill.G',
-        messageToDisplay : '',
-      }
+        friend: 'Bill.G',
+        messageToDisplay: '',
+      },
     )
   }
 
-  receiveMessageFromFriend = (message) => {
+  receiveMessageFromFriend = message => {
     this.setState(
       {
-        ...this.state,
-        messageToDisplay : message,
-        actionType : 'confirmed',
-        speaker : this.state.friend,
-      }
+        messageToDisplay: message,
+        actionType: 'confirmed',
+        speaker: this.state.friend,
+      },
     )
   }
 
-  clearInputAfterEnter = (event) => {
+  clearInputAfterEnter = event => {
     if (event.key === 'Enter') {
       this.onClickSendMessage()
-    }
-    else if (event.key === 'Control') {
+    } else if (event.key === 'Control') {
       this.receiveMessageFromFriend('Such a fun, React.')
     }
   }
@@ -82,20 +75,20 @@ class App extends React.Component {
   render = () => (
     <div>
       <FriendsList
-        onAddNewFriend = {this.onAddNewFriend}
-        onClickFriend = {this.onClickFriend}
+        onAddNewFriend={this.onAddNewFriend}
+        onClickFriend={this.onClickFriend}
       />
       <Conversations
-        newMessage = {this.state.messageToDisplay}
-        actionType = {this.state.actionType}
-        friend = {this.state.friend}
-        speaker = {this.state.speaker}
+        newMessage={this.state.messageToDisplay}
+        actionType={this.state.actionType}
+        friend={this.state.friend}
+        speaker={this.state.speaker}
       />
       <Cockpit
-        messageValue = {this.state.messageValue}
-        onChangeMessage = {this.onChangeMessage}
-        onClickSendMessage = {this.onClickSendMessage}
-        clearInputAfterEnter = {this.clearInputAfterEnter}
+        messageValue={this.state.messageValue}
+        onChangeMessage={this.onChangeMessage}
+        onClickSendMessage={this.onClickSendMessage}
+        clearInputAfterEnter={this.clearInputAfterEnter}
       />
     </div>
   )

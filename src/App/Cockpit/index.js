@@ -9,18 +9,19 @@ const Cockpit = props => (
     <EditMessage
       messageValue={props.messageValue}
       onChangeMessage={props.onChangeMessage}
-      clearInputAfterEnter = {props.clearInputAfterEnter}
+      clearInputAfterEnter={props.clearInputAfterEnter}
     />
     <SendMessage
-      onClickSendMessage = {props.onClickSendMessage}
+      onClickSendMessage={props.onClickSendMessage}
     />
   </div>
 )
 
 Cockpit.propTypes = {
-  messageValue : PropTypes.string.isRequired,
-  onChangeMessage : PropTypes.func.isRequired,
-  onClickSendMessage : PropTypes.func.isRequired,
+  messageValue: PropTypes.string.isRequired,
+  onChangeMessage: PropTypes.func.isRequired,
+  onClickSendMessage: PropTypes.func.isRequired,
+  clearInputAfterEnter: PropTypes.func.isRequired,
 }
 
 export default Cockpit

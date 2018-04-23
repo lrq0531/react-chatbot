@@ -14,6 +14,7 @@
     "import/resolver": "webpack",
   },
   "rules": {
+    "semi": 0,
     "function-paren-newline": ["error", "consistent"],
     "no-console": ["warn", { allow: ["warn", "error"] }],
     "no-unused-expressions": ["error", { "allowShortCircuit": true, "allowTernary": true }],
