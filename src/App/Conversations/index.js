@@ -3,56 +3,24 @@ import PropTypes from 'prop-types'
 
 import MessageBar from './MessageBar'
 
-function newMessage(message, speaker, key) {
-  if (typeof message !== 'undefined' && message !== '') {
-    return (
+const Conversations = props => (
+  <div>
+    {props.messagesWithAFriend.map(message => (
       <MessageBar
-        key={key}
-        displayMessage={message}
-        speaker={speaker}
+        key={message.id}
+        displayMessage={message.content}
+        speaker={message.speaker}
       />
-    )
-  }
-
-  return ''
-}
-
-class Conversations extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.addMessageToConversation = this.addMessageToConversation.bind(this)
-    this.conversionsWithAFreind = {}
-  }
-
-  addMessageToConversation(message, friend, speaker) {
-    const withAFriend = this.conversionsWithAFreind[this.props.friend]
-    if (typeof withAFriend !== 'undefined') {
-      withAFriend.push(newMessage(message, speaker, withAFriend.length))
-      return withAFriend
-    }
-
-    this.conversionsWithAFreind[this.props.friend] = [newMessage(message, speaker, 0)]
-    return this.conversionsWithAFreind[this.props.friend]
-  }
-
-  render = () => (
-    <div>
-      {
-        this.addMessageToConversation(
-          this.props.newMessage,
-          this.props.friend,
-          this.props.speaker,
-        )
-      }
-    </div>
-  )
-}
+    ))}
+  </div>
+)
 
 Conversations.propTypes = {
-  newMessage: PropTypes.string.isRequired,
-  friend: PropTypes.string.isRequired,
-  speaker: PropTypes.string.isRequired,
+  messagesWithAFriend: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    speaker: PropTypes.string.isRequired,
+  })).isRequired,
 }
 
 export default Conversations

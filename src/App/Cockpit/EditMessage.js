@@ -19,6 +19,7 @@ class EditMessage extends React.Component {
   render() {
     return (
       <input
+        placeholder="input"
         ref={this.inputRef}
         value={this.props.messageValue}
         onChange={this.props.onChangeMessage}
