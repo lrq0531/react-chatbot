@@ -25,10 +25,6 @@ class Conversations extends React.Component {
     this.conversionsWithAFreind = {}
   }
 
-  shouldComponentUpdate({ actionType }) {
-    return actionType === 'confirmed'
-  }
-
   addMessageToConversation(message, friend, speaker) {
     const withAFriend = this.conversionsWithAFreind[this.props.friend]
     if (typeof withAFriend !== 'undefined') {
@@ -55,7 +51,6 @@ class Conversations extends React.Component {
 
 Conversations.propTypes = {
   newMessage: PropTypes.string.isRequired,
-  actionType: PropTypes.string.isRequired,
   friend: PropTypes.string.isRequired,
   speaker: PropTypes.string.isRequired,
 }

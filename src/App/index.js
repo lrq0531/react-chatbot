@@ -10,7 +10,6 @@ class App extends React.Component {
     this.state = {
       messageValue: 'Start chatting',
       messageToDisplay: '',
-      actionType: '',
       friend: 'Alex',
       speaker: '',
     }
@@ -20,7 +19,6 @@ class App extends React.Component {
     this.setState(
       {
         messageValue: event.target.value,
-        actionType: 'typing',
       },
     )
   }
@@ -30,7 +28,6 @@ class App extends React.Component {
       {
         messageValue: '',
         messageToDisplay: this.state.messageValue,
-        actionType: 'confirmed',
         speaker: 'me',
       },
     )
@@ -58,7 +55,6 @@ class App extends React.Component {
     this.setState(
       {
         messageToDisplay: message,
-        actionType: 'confirmed',
         speaker: this.state.friend,
       },
     )
@@ -80,7 +76,6 @@ class App extends React.Component {
       />
       <Conversations
         newMessage={this.state.messageToDisplay}
-        actionType={this.state.actionType}
         friend={this.state.friend}
         speaker={this.state.speaker}
       />
