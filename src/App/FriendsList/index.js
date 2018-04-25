@@ -9,12 +9,11 @@ const FriendsList = props => (
   <div>
     <div>
       {
-        map(props.friendsList, friend => (
+        map(props.friends, friend => (
           <Friend
-            onClickFriend={props.onClickFriend}
-            friendName={friend.friendName}
-            id={friend.id}
             key={friend.id}
+            {...friend}
+            onClick={props.onClickFriend}
           />
         ))
       }
@@ -26,8 +25,8 @@ const FriendsList = props => (
 FriendsList.propTypes = {
   onAddNewFriend: PropTypes.func.isRequired,
   onClickFriend: PropTypes.func.isRequired,
-  friendsList: PropTypes.arrayOf(PropTypes.shape({
-    friendName: PropTypes.string.isRequired,
+  friends: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
   })).isRequired,
 }

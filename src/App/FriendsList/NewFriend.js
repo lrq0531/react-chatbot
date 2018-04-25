@@ -1,9 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+const style = {
+  fontWeight: 'bold',
+}
+
 const NewFriend = ({ onAddNewFriend }) => (
-  <button onClick={onAddNewFriend}>
-    <b>+</b>
+  <button
+    style={style}
+    onClick={onAddNewFriend}
+  >
+    +
   </button>
 )
 

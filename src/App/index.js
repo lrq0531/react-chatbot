@@ -7,9 +7,9 @@ import FriendsList from './FriendsList'
 
 const generateId = () => `${new Date().getTime()}`
 
-const createNewFriend = friendName => ({
+const createNewFriend = name => ({
   id: generateId(),
-  friendName,
+  name,
 });
 
 class App extends React.Component {
@@ -22,7 +22,7 @@ class App extends React.Component {
       messageValue: '',
       friend: initialFriend,
       messages: [],
-      allFriends: [initialFriend],
+      friends: [initialFriend],
     }
   }
 
@@ -34,15 +34,15 @@ class App extends React.Component {
 
   onClickFriend = (event, friendId) => {
     this.setState({
-      friend: find(this.state.allFriends, o => o.id === friendId),
+      friend: find(this.state.friends, o => o.id === friendId),
     })
   }
 
   onAddNewFriend = () => {
     this.setState({
-      allFriends: [
-        ...this.state.allFriends,
-        createNewFriend(`Jack.${this.state.allFriends.length}`),
+      friends: [
+        ...this.state.friends,
+        createNewFriend(`Jack.${this.state.friends.length}`),
       ],
     })
   }
@@ -69,29 +69,44 @@ class App extends React.Component {
       this.setState({
         messages: this.addMessage(
           `I see you said: ${content}`,
-          this.state.friend.friendName,
+          this.state.friend.name,
         ),
       })
     });
   }
 
-  render = () => (
-    <div>
-      <FriendsList
-        onAddNewFriend={this.onAddNewFriend}
-        onClickFriend={this.onClickFriend}
-        friendsList={this.state.allFriends}
-      />
-      <Conversations
-        messages={this.state.messages}
-      />
-      <Cockpit
-        messageValue={this.state.messageValue}
-        onChangeMessage={this.onChangeMessage}
-        sendMessage={this.sendMessage}
-      />
-    </div>
-  )
+  render = () => {
+    const styles = {
+      container: {
+        display: 'flex',
+      },
+      chat: {
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+      },
+    }
+
+    return (
+      <div style={styles.container}>
+        <FriendsList
+          onAddNewFriend={this.onAddNewFriend}
+          onClickFriend={this.onClickFriend}
+          friends={this.state.friends}
+        />
+        <div style={styles.chat}>
+          <Conversations
+            messages={this.state.messages}
+          />
+          <Cockpit
+            messageValue={this.state.messageValue}
+            onChangeMessage={this.onChangeMessage}
+            sendMessage={this.sendMessage}
+          />
+        </div>
+      </div>
+    )
+  }
 }
 
 export default App;
