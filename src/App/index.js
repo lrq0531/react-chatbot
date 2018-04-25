@@ -35,6 +35,9 @@ class App extends React.Component {
   onClickFriend = (event, friendId) => {
     this.setState({
       friend: find(this.state.friends, o => o.id === friendId),
+      messages: friendId === this.state.friend.id
+        ? this.state.messages
+        : [], // TODO store current convo to return to it
     })
     this.input.focus()
   }
