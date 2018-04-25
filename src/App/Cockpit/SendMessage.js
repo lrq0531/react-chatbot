@@ -1,16 +1,11 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
-const SendMessage = ({ onClickSendMessage }) => (
+const SendMessage = () => (
   <button
-    onClick={onClickSendMessage}
+    type="submit"
   >
     <b>Send</b>
   </button>
 )
-
-SendMessage.propTypes = {
-  onClickSendMessage: PropTypes.func.isRequired,
-}
 
 export default SendMessage

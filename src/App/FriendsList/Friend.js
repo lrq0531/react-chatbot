@@ -3,13 +3,14 @@ import PropTypes from 'prop-types'
 
 const Friend = props => (
   <div>
-    <button onClick={props.onClickFriend}>
+    <button onClick={e => { props.onClickFriend(e, props.id) }}>
       {props.friendName}
     </button>
   </div>
 )
 
 Friend.propTypes = {
+  id: PropTypes.string.isRequired,
   onClickFriend: PropTypes.func.isRequired,
   friendName: PropTypes.string.isRequired,
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { map } from 'lodash';
 
 import Friend from './Friend'
 import NewFriend from './NewFriend'
@@ -7,15 +8,17 @@ import NewFriend from './NewFriend'
 const FriendsList = props => (
   <div>
     <div>
-      {props.friendsList.map(friend => (
-        <Friend
-          onClickFriend={props.onClickFriend}
-          friendName={friend.friendName}
-          key={friend.id}
-        />
-      ))}
+      {
+        map(props.friendsList, friend => (
+          <Friend
+            onClickFriend={props.onClickFriend}
+            friendName={friend.friendName}
+            id={friend.id}
+            key={friend.id}
+          />
+        ))
+      }
     </div>
-
     <NewFriend onAddNewFriend={props.onAddNewFriend} />
   </div>
 )
