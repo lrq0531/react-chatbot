@@ -9,6 +9,7 @@ const Cockpit = props => (
     <EditMessage
       messageValue={props.messageValue}
       onChangeMessage={props.onChangeMessage}
+      inputRef={props.inputRef}
     />
     <SendMessage />
   </form>
@@ -18,6 +19,7 @@ Cockpit.propTypes = {
   messageValue: PropTypes.string.isRequired,
   onChangeMessage: PropTypes.func.isRequired,
   sendMessage: PropTypes.func.isRequired,
+  inputRef: PropTypes.func.isRequired,
 }
 
 export default Cockpit

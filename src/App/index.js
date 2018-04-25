@@ -36,6 +36,7 @@ class App extends React.Component {
     this.setState({
       friend: find(this.state.friends, o => o.id === friendId),
     })
+    this.input.focus()
   }
 
   onAddNewFriend = () => {
@@ -45,6 +46,11 @@ class App extends React.Component {
         createNewFriend(`Jack.${this.state.friends.length}`),
       ],
     })
+    this.input.focus()
+  }
+
+  getInputRef = input => {
+    this.input = input;
   }
 
   addMessage = (content, speaker) => [
@@ -73,6 +79,7 @@ class App extends React.Component {
         ),
       })
     });
+    this.input.focus();
   }
 
   render = () => {
@@ -102,6 +109,7 @@ class App extends React.Component {
             messageValue={this.state.messageValue}
             onChangeMessage={this.onChangeMessage}
             sendMessage={this.sendMessage}
+            inputRef={this.getInputRef}
           />
         </div>
       </div>
