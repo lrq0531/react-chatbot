@@ -8,18 +8,11 @@ class App extends React.Component {
   constructor(props) {
     super(props)
 
-    this.startChat = [
-      {
-        id: `${(new Date()).getTime()}`,
-        content: '',
-        speaker: '',
-      },
-    ]
-
     this.state = {
       messageValue: '',
-      friend: 'Alex',
+      friend: '',
       allMessages: {},
+      allFriends: [],
     }
   }
 
@@ -32,7 +25,7 @@ class App extends React.Component {
   }
 
   onClickSendMessage = () => {
-    this.dislayNewMessage(this.state.messageValue, 'me')
+    this.dislayNewMessage(this.state.messageValue, 'me', this.state.friend)
   }
 
   onClickFriend = event => {
@@ -44,9 +37,18 @@ class App extends React.Component {
   }
 
   onAddNewFriend = () => {
+    const newFriendName = `Jack.${this.state.allFriends.length}`
+
     this.setState(
       {
-        friend: 'Bill.G',
+        friend: newFriendName,
+        allFriends: [
+          ...this.state.allFriends,
+          {
+            id: `${(new Date()).getTime()}`,
+            friendName: newFriendName,
+          },
+        ],
       },
     )
   }
@@ -57,11 +59,11 @@ class App extends React.Component {
       return chattingList
     }
 
-    return this.startChat
+    return []
   }
 
   receiveMessageFromFriend = message => {
-    this.dislayNewMessage(message, this.state.friend)
+    this.dislayNewMessage(message, this.state.friend, this.state.friend)
   }
 
   clearInputAfterEnter = event => {
@@ -87,13 +89,19 @@ class App extends React.Component {
     return [messageElement]
   }
 
-  dislayNewMessage = (message, speaker) => {
-    if (typeof message !== 'undefined' && message !== '') {
+  validateProperty = property => (
+    typeof property !== 'undefined' && property !== ''
+  )
+
+  dislayNewMessage = (message, speaker, to) => {
+    if (this.validateProperty(message) &&
+        this.validateProperty(to) &&
+        this.validateProperty(speaker)) {
       this.setState(
         {
           allMessages: {
             ...this.state.allMessages,
-            [this.state.friend]: this.addMessageToChattingList(
+            [to]: this.addMessageToChattingList(
               message,
               speaker,
             ),
@@ -109,6 +117,7 @@ class App extends React.Component {
       <FriendsList
         onAddNewFriend={this.onAddNewFriend}
         onClickFriend={this.onClickFriend}
+        friendsList={this.state.allFriends}
       />
       <Conversations
         messagesWithAFriend={this.getChattingList()}
