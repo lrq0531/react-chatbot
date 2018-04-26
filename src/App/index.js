@@ -4,6 +4,8 @@ import Cockpit from './Cockpit'
 import Conversations from './Conversations'
 import FriendsList from './FriendsList'
 
+const uid = () => (`${(new Date()).getTime()}`)
+
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -16,6 +18,7 @@ class App extends React.Component {
     }
   }
 
+
   onChangeMessage = event => {
     this.setState(
       {
@@ -24,33 +27,36 @@ class App extends React.Component {
     )
   }
 
-  onClickSendMessage = () => {
+  onSubmitMessage = event => {
+    event.preventDefault()
     this.dislayNewMessage(this.state.messageValue, 'me', this.state.friend)
+    this.inputRef.focus()
   }
 
-  onClickFriend = event => {
+  onClickFriend = (event, friendId) => {
     this.setState(
       {
-        friend: event.target.textContent,
+        friend: friendId,
       },
     )
+    this.inputRef.focus()
   }
 
   onAddNewFriend = () => {
     const newFriendName = `Jack.${this.state.allFriends.length}`
+    const idOfFriend = uid()
 
-    this.setState(
-      {
-        friend: newFriendName,
-        allFriends: [
-          ...this.state.allFriends,
-          {
-            id: `${(new Date()).getTime()}`,
-            friendName: newFriendName,
-          },
-        ],
-      },
-    )
+    this.setState(state => ({
+      friend: idOfFriend,
+      allFriends: [
+        ...state.allFriends,
+        {
+          id: idOfFriend,
+          friendName: newFriendName,
+        },
+      ],
+    }))
+    this.inputRef.focus()
   }
 
   getChattingList = () => {
@@ -62,21 +68,18 @@ class App extends React.Component {
     return []
   }
 
+  refOfInput = input => {
+    this.inputRef = input
+    this.inputRef.focus()
+  }
+
   receiveMessageFromFriend = message => {
     this.dislayNewMessage(message, this.state.friend, this.state.friend)
   }
 
-  clearInputAfterEnter = event => {
-    if (event.key === 'Enter') {
-      this.onClickSendMessage()
-    } else if (event.key === 'Control') {
-      this.receiveMessageFromFriend('Evolution.')
-    }
-  }
-
   addMessageToChattingList = (newMessage, speaker) => {
     const messageElement = {
-      id: `${(new Date()).getTime()}`,
+      id: uid(),
       content: newMessage,
       speaker,
     }
@@ -97,39 +100,44 @@ class App extends React.Component {
     if (this.validateProperty(message) &&
         this.validateProperty(to) &&
         this.validateProperty(speaker)) {
-      this.setState(
-        {
-          allMessages: {
-            ...this.state.allMessages,
-            [to]: this.addMessageToChattingList(
-              message,
-              speaker,
-            ),
-          },
-          messageValue: (speaker === 'me' ? '' : this.state.messageValue),
+      this.setState(state => ({
+        allMessages: {
+          ...state.allMessages,
+          [to]: this.addMessageToChattingList(
+            message,
+            speaker,
+          ),
         },
-      )
+        messageValue: (speaker === 'me' ? '' : this.state.messageValue),
+      }),
+      () => {
+        if (speaker === 'me') {
+          setTimeout(this.receiveMessageFromFriend, 1000, 'Nice day.')
+        }
+      })
     }
   }
 
-  render = () => (
-    <div>
-      <FriendsList
-        onAddNewFriend={this.onAddNewFriend}
-        onClickFriend={this.onClickFriend}
-        friendsList={this.state.allFriends}
-      />
-      <Conversations
-        messagesWithAFriend={this.getChattingList()}
-      />
-      <Cockpit
-        messageValue={this.state.messageValue}
-        onChangeMessage={this.onChangeMessage}
-        onClickSendMessage={this.onClickSendMessage}
-        clearInputAfterEnter={this.clearInputAfterEnter}
-      />
-    </div>
-  )
+  render() {
+    return (
+      <div>
+        <FriendsList
+          onAddNewFriend={this.onAddNewFriend}
+          onClickFriend={this.onClickFriend}
+          friendsList={this.state.allFriends}
+        />
+        <Conversations
+          messagesWithAFriend={this.getChattingList()}
+        />
+        <Cockpit
+          messageValue={this.state.messageValue}
+          onChangeMessage={this.onChangeMessage}
+          onSubmitMessage={this.onSubmitMessage}
+          refOfInput={this.refOfInput}
+        />
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App

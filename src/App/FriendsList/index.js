@@ -9,13 +9,12 @@ const FriendsList = props => (
     <div>
       {props.friendsList.map(friend => (
         <Friend
-          onClickFriend={props.onClickFriend}
+          onClickFriend={e => { props.onClickFriend(e, friend.id) }}
           friendName={friend.friendName}
           key={friend.id}
         />
       ))}
     </div>
-
     <NewFriend onAddNewFriend={props.onAddNewFriend} />
   </div>
 )

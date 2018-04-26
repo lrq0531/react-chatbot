@@ -5,23 +5,21 @@ import EditMessage from './EditMessage'
 import SendMessage from './SendMessage'
 
 const Cockpit = props => (
-  <div>
+  <form onSubmit={props.onSubmitMessage}>
     <EditMessage
       messageValue={props.messageValue}
       onChangeMessage={props.onChangeMessage}
-      clearInputAfterEnter={props.clearInputAfterEnter}
+      refOfInput={props.refOfInput}
     />
-    <SendMessage
-      onClickSendMessage={props.onClickSendMessage}
-    />
-  </div>
+    <SendMessage />
+  </form>
 )
 
 Cockpit.propTypes = {
   messageValue: PropTypes.string.isRequired,
   onChangeMessage: PropTypes.func.isRequired,
-  onClickSendMessage: PropTypes.func.isRequired,
-  clearInputAfterEnter: PropTypes.func.isRequired,
+  onSubmitMessage: PropTypes.func.isRequired,
+  refOfInput: PropTypes.func.isRequired,
 }
 
 export default Cockpit
