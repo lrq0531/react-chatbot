@@ -1,7 +1,6 @@
 import React from 'react'
 
 import Cockpit from './Cockpit'
-import Conversations from './Conversations'
 import FriendsList from './FriendsList'
 
 const uid = () => (`${(new Date()).getTime()}`)
@@ -126,10 +125,8 @@ class App extends React.Component {
           onClickFriend={this.onClickFriend}
           friendsList={this.state.allFriends}
         />
-        <Conversations
-          messagesWithAFriend={this.getChattingList()}
-        />
         <Cockpit
+          messagesWithAFriend={this.getChattingList()}
           messageValue={this.state.messageValue}
           onChangeMessage={this.onChangeMessage}
           onSubmitMessage={this.onSubmitMessage}
