@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 
 class EditMessage extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.input = React.createRef();
+    this.input = React.createRef()
   }
 
   componentDidMount() {
-    this.props.inputRef(this.input.current);
+    this.props.inputRef(this.input.current)
     this.input.current.focus()
   }
 

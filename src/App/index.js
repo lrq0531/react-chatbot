@@ -1,5 +1,5 @@
 import React from 'react'
-import { find } from 'lodash';
+import { find } from 'lodash'
 
 import Cockpit from './Cockpit'
 import Conversations from './Conversations'
@@ -10,7 +10,7 @@ const generateId = () => `${new Date().getTime()}`
 const createNewFriend = name => ({
   id: generateId(),
   name,
-});
+})
 
 class App extends React.Component {
   constructor(props) {
@@ -53,7 +53,7 @@ class App extends React.Component {
   }
 
   getInputRef = input => {
-    this.input = input;
+    this.input = input
   }
 
   addMessage = (content, speaker) => [
@@ -66,10 +66,10 @@ class App extends React.Component {
   ];
 
   sendMessage = e => {
-    e.preventDefault();
+    e.preventDefault()
     const content = this.state.messageValue
 
-    if (content === '') return;
+    if (content === '') return
 
     this.setState({
       messages: this.addMessage(content, 'me'),
@@ -81,8 +81,8 @@ class App extends React.Component {
           this.state.friend.name,
         ),
       })
-    });
-    this.input.focus();
+    })
+    this.input.focus()
   }
 
   render = () => {
@@ -120,4 +120,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default App

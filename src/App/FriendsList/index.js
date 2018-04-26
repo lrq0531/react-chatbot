@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { map } from 'lodash';
+import { map } from 'lodash'
 
 import Friend from './Friend'
 import NewFriend from './NewFriend'
