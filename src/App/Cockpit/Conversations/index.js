@@ -6,6 +6,7 @@ import MessageBar from './MessageBar'
 const style = {
   flex: 1,
   overflowY: 'auto',
+  marginLeft: '10px',
 }
 
 const Conversations = props => (

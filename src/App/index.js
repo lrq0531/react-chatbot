@@ -3,10 +3,13 @@ import React from 'react'
 import Cockpit from './Cockpit'
 import FriendsList from './FriendsList'
 
+import FindFriend from './FriendsList/FindFriend'
+
 const style = {
   display: 'flex',
   maxWidth: '90%',
   margin: 'auto',
+  zIndex: -1,
 }
 
 const uid = () => (`${(new Date()).getTime()}`)
@@ -50,8 +53,16 @@ class App extends React.Component {
     this.inputRef.focus()
   }
 
-  onAddNewFriend = () => {
-    const newFriendName = `Jack.${this.state.allFriends.length}`
+  getChattingList = () => {
+    const chattingList = this.state.allMessages[this.state.friend]
+    if (typeof chattingList !== 'undefined') {
+      return chattingList
+    }
+
+    return []
+  }
+
+  addNewFriend = newFriendName => {
     const idOfFriend = uid()
 
     this.setState(state => ({
@@ -67,13 +78,11 @@ class App extends React.Component {
     this.inputRef.focus()
   }
 
-  getChattingList = () => {
-    const chattingList = this.state.allMessages[this.state.friend]
-    if (typeof chattingList !== 'undefined') {
-      return chattingList
-    }
-
-    return []
+  findFriend = () => {
+    /* test codes */
+    this.popDialogue = true
+    this.setState({})
+    this.inputRef.focus()
   }
 
   refOfInput = input => {
@@ -126,11 +135,18 @@ class App extends React.Component {
     }
   }
 
+  find = event => {
+    event.preventDefault()
+    this.popDialogue = false
+    const friendName = event.target[0].value
+    this.addNewFriend(friendName)
+  }
+
   render() {
     return (
       <div style={{ ...style, height: (document.documentElement.clientHeight * 0.9) }}>
         <FriendsList
-          onAddNewFriend={this.onAddNewFriend}
+          onAddNewFriend={this.findFriend}
           onClickFriend={this.onClickFriend}
           friendsList={this.state.allFriends}
         />
@@ -141,6 +157,12 @@ class App extends React.Component {
           onSubmitMessage={this.onSubmitMessage}
           refOfInput={this.refOfInput}
         />
+        {this.popDialogue
+          ? <FindFriend
+            find={this.find}
+          />
+          : ''
+        }
       </div>
     )
   }

@@ -8,8 +8,6 @@ const style = {
   flex: 12,
   display: 'flex',
   flexDirection: 'column',
-  // position: 'relative',
-  // bottom: '10px',
 }
 
 const Cockpit = props => (
