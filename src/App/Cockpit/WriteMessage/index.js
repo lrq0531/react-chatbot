@@ -4,8 +4,18 @@ import PropTypes from 'prop-types'
 import EditMessage from './EditMessage'
 import SendMessage from './SendMessage'
 
+const style = {
+  display: 'flex',
+  // position: 'fixed',
+  // right: 0,
+  // bottom: 0,
+}
+
 const WriteMessage = props => (
-  <form onSubmit={props.onSubmitMessage}>
+  <form
+    style={style}
+    onSubmit={props.onSubmitMessage}
+  >
     <EditMessage
       messageValue={props.messageValue}
       onChangeMessage={props.onChangeMessage}

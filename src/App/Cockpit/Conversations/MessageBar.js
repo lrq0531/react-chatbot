@@ -8,9 +8,9 @@ const MessageBar = props => {
   }
 
   return (
-    <p style={style}>
+    <div style={style}>
       {props.speaker} : {props.displayMessage}
-    </p>
+    </div>
   )
 }
 

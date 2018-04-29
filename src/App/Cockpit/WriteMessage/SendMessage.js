@@ -3,6 +3,7 @@ import React from 'react'
 const SendMessage = () => {
   const style = {
     fontWeight: 'bold',
+    flex: 1,
   }
 
   return (

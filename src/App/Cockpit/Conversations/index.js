@@ -3,8 +3,13 @@ import PropTypes from 'prop-types'
 
 import MessageBar from './MessageBar'
 
+const style = {
+  flex: 1,
+  overflowY: 'auto',
+}
+
 const Conversations = props => (
-  <div>
+  <div style={style}>
     {props.messagesWithAFriend.map(message => (
       <MessageBar
         key={message.id}

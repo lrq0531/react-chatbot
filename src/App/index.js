@@ -3,6 +3,12 @@ import React from 'react'
 import Cockpit from './Cockpit'
 import FriendsList from './FriendsList'
 
+const style = {
+  display: 'flex',
+  maxWidth: '90%',
+  margin: 'auto',
+}
+
 const uid = () => (`${(new Date()).getTime()}`)
 
 class App extends React.Component {
@@ -15,8 +21,11 @@ class App extends React.Component {
       allMessages: {},
       allFriends: [],
     }
-  }
 
+    window.addEventListener('resize', () => {
+      this.setState({})
+    })
+  }
 
   onChangeMessage = event => {
     this.setState(
@@ -119,7 +128,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{ ...style, height: (document.documentElement.clientHeight * 0.9) }}>
         <FriendsList
           onAddNewFriend={this.onAddNewFriend}
           onClickFriend={this.onClickFriend}

@@ -4,9 +4,16 @@ import PropTypes from 'prop-types'
 import Friend from './Friend'
 import NewFriend from './NewFriend'
 
+const style = {
+  flex: 1,
+  display: 'flex',
+  flexDirection: 'column',
+  border: '1px',
+  overflowY: 'auto',
+}
 const FriendsList = props => (
-  <div>
-    <div>
+  <div style={style}>
+    <div style={style}>
       {props.friendsList.map(friend => (
         <Friend
           onClickFriend={e => { props.onClickFriend(e, friend.id) }}

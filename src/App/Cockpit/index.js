@@ -4,8 +4,16 @@ import PropTypes from 'prop-types'
 import WriteMessage from './WriteMessage'
 import Conversations from './Conversations'
 
+const style = {
+  flex: 12,
+  display: 'flex',
+  flexDirection: 'column',
+  // position: 'relative',
+  // bottom: '10px',
+}
+
 const Cockpit = props => (
-  <div>
+  <div style={style}>
     <Conversations
       messagesWithAFriend={props.messagesWithAFriend}
     />

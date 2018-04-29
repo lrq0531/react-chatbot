@@ -1,8 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+const style = {
+  flex: 7,
+}
 const EditMessage = props => (
   <input
+    style={style}
     ref={props.refOfInput}
     placeholder="Happy chatting"
     value={props.messageValue}
