@@ -20,9 +20,13 @@ class App extends React.Component {
 
     this.state = {
       messageValue: '',
-      friend: '',
-      allMessages: {},
-      allFriends: [],
+      friend: 'Me',
+      allFriends: {
+        Me: {
+          friendName: 'Me',
+          allMessages: [],
+        },
+      },
     }
 
     window.addEventListener('resize', () => {
@@ -54,9 +58,9 @@ class App extends React.Component {
   }
 
   getChattingList = () => {
-    const chattingList = this.state.allMessages[this.state.friend]
-    if (typeof chattingList !== 'undefined') {
-      return chattingList
+    const friend = this.state.allFriends[this.state.friend]
+    if (typeof friend !== 'undefined') {
+      return friend.allMessages
     }
 
     return []
@@ -67,13 +71,13 @@ class App extends React.Component {
 
     this.setState(state => ({
       friend: idOfFriend,
-      allFriends: [
+      allFriends: {
         ...state.allFriends,
-        {
-          id: idOfFriend,
+        [idOfFriend]: {
           friendName: newFriendName,
+          allMessages: [],
         },
-      ],
+      },
     }))
     this.inputRef.focus()
   }
@@ -87,11 +91,12 @@ class App extends React.Component {
 
   refOfInput = input => {
     this.inputRef = input
-    this.inputRef.focus()
+    // this.inputRef.focus()
   }
 
   receiveMessageFromFriend = message => {
-    this.dislayNewMessage(message, this.state.friend, this.state.friend)
+    const speakerName = this.state.allFriends[this.state.friend].friendName
+    this.dislayNewMessage(message, speakerName, this.state.friend)
   }
 
   addMessageToChattingList = (newMessage, speaker) => {
@@ -101,7 +106,7 @@ class App extends React.Component {
       speaker,
     }
 
-    const chatting = this.state.allMessages[this.state.friend]
+    const chatting = this.state.allFriends[this.state.friend].allMessages
     if (typeof chatting !== 'undefined') {
       return [...chatting, messageElement]
     }
@@ -118,12 +123,15 @@ class App extends React.Component {
         this.validateProperty(to) &&
         this.validateProperty(speaker)) {
       this.setState(state => ({
-        allMessages: {
-          ...state.allMessages,
-          [to]: this.addMessageToChattingList(
-            message,
-            speaker,
-          ),
+        allFriends: {
+          ...state.allFriends,
+          [to]: {
+            friendName: state.allFriends[to].friendName,
+            allMessages: this.addMessageToChattingList(
+              message,
+              speaker,
+            ),
+          },
         },
         messageValue: (speaker === 'me' ? '' : this.state.messageValue),
       }),
