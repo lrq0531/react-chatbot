@@ -5,12 +5,6 @@ import FriendsList from './FriendsList'
 
 import FindFriend from './FriendsList/FindFriend'
 
-const style = {
-  display: 'flex',
-  maxWidth: '90%',
-  margin: 'auto',
-  zIndex: -1,
-}
 
 const uid = () => (`${(new Date()).getTime()}`)
 
@@ -151,6 +145,13 @@ class App extends React.Component {
   }
 
   render() {
+    const style = {
+      display: 'flex',
+      maxWidth: '90%',
+      margin: 'auto',
+      zIndex: -1,
+    }
+
     return (
       <div style={{ ...style, height: (document.documentElement.clientHeight * 0.9) }}>
         <FriendsList
