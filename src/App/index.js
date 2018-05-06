@@ -3,14 +3,15 @@ import React from 'react'
 import Cockpit from './Cockpit'
 import FriendsList from './FriendsList'
 
+import * as Actions from '../actions'
 import FindFriend from './FriendsList/FindFriend'
-
 
 const uid = () => (`${(new Date()).getTime()}`)
 
 class App extends React.Component {
   constructor(props) {
     super(props)
+    const { store } = props
 
     this.state = {
       messageValue: '',
@@ -22,6 +23,8 @@ class App extends React.Component {
         },
       },
     }
+
+    store.dispatch(Actions.init())
 
     window.addEventListener('resize', () => {
       this.setState({})
@@ -38,7 +41,9 @@ class App extends React.Component {
 
   onSubmitMessage = event => {
     event.preventDefault()
-    this.dislayNewMessage(this.state.messageValue, 'me', this.state.friend)
+    const { store } = this.props
+    const { reducerCockpit } = store.getState()
+    store.dispatch(Actions.sendMessage('temporary message', 'me', reducerCockpit.friend))
     this.inputRef.focus()
   }
 
@@ -52,7 +57,9 @@ class App extends React.Component {
   }
 
   getChattingList = () => {
-    const friend = this.state.allFriends[this.state.friend]
+    const { store } = this.props
+    const { reducerCockpit } = store.getState()
+    const friend = reducerCockpit.allFriends[reducerCockpit.friend]
     if (typeof friend !== 'undefined') {
       return friend.allMessages
     }
