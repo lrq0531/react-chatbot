@@ -1,17 +1,17 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import Cockpit from './Cockpit'
 import FriendsList from './FriendsList'
-
-import * as Actions from '../actions'
 import FindFriend from './FriendsList/FindFriend'
+import * as allActions from '../actions'
 
 const uid = () => (`${(new Date()).getTime()}`)
 
 class App extends React.Component {
   constructor(props) {
     super(props)
-    const { store } = props
 
     this.state = {
       messageValue: '',
@@ -23,8 +23,8 @@ class App extends React.Component {
         },
       },
     }
-
-    store.dispatch(Actions.init())
+    const { fireActions } = this.props
+    fireActions.init()
 
     window.addEventListener('resize', () => {
       this.setState({})
@@ -41,9 +41,8 @@ class App extends React.Component {
 
   onSubmitMessage = event => {
     event.preventDefault()
-    const { store } = this.props
-    const { reducerCockpit } = store.getState()
-    store.dispatch(Actions.sendMessage('temporary message', 'me', reducerCockpit.friend))
+    const { fireActions, friend } = this.props
+    fireActions.sendMessage('temporary message', 'me', friend)
     this.inputRef.focus()
   }
 
@@ -57,11 +56,12 @@ class App extends React.Component {
   }
 
   getChattingList = () => {
-    const { store } = this.props
-    const { reducerCockpit } = store.getState()
-    const friend = reducerCockpit.allFriends[reducerCockpit.friend]
-    if (typeof friend !== 'undefined') {
-      return friend.allMessages
+    const { friend, allFriends } = this.props
+    if (typeof friend !== 'undefined' && typeof allFriends !== 'undefined') {
+      const friendInfo = allFriends[friend]
+      if (typeof friendInfo !== 'undefined') {
+        return friendInfo.allMessages
+      }
     }
 
     return []
@@ -184,4 +184,13 @@ class App extends React.Component {
   }
 }
 
-export default App
+const mapStateToProps = state => ({
+  friend: state.reducerCockpit.friend,
+  allFriends: state.reducerCockpit.allFriends,
+})
+
+const mapDispatchToProps = dispatch => ({
+  fireActions: bindActionCreators(allActions, dispatch),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
