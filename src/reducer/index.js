@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
 
-import reducerCockpit from './reducerCockpit'
+import cockpit from './cockpit'
 
 const reducer = combineReducers({
-  reducerCockpit,
+  cockpit,
 })
 
 export default reducer
