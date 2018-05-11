@@ -9,13 +9,14 @@ const cockpit = (state = initCockpit, action) => {
         ...state,
         message: action.payload.message,
       })
+
     case actions.SEND_MESSAGE:
       return ({
         ...state,
         allFriends: {
           ...state.allFriends,
-          [state.friend]: {
-            friendName: state.allFriends[action.payload.to].friendName,
+          [action.payload.to]: {
+            ...state.allFriends[action.payload.to],
             allMessages: addNewMessage(
               action.payload.message,
               action.payload.speaker,
@@ -25,6 +26,20 @@ const cockpit = (state = initCockpit, action) => {
         },
         message: (action.payload.speaker === 'me' ? '' : state.messageValue),
       })
+
+    case actions.FIND_FRIEND:
+      return ({
+        ...state,
+        friend: action.payload.uid,
+        allFriends: {
+          ...state.allFriends,
+          [action.payload.uid]: {
+            friendName: action.payload.friend,
+            allMessages: [],
+          },
+        },
+      })
+
     default:
       return state
   }

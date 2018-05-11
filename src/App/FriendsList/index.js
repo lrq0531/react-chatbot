@@ -9,8 +9,8 @@ const style = {
   flex: 1,
   display: 'flex',
   flexDirection: 'column',
-  border: '1px',
   overflowY: 'auto',
+  border: '1px solid',
 }
 const FriendsList = props => {
   const friends = []

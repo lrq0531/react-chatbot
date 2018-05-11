@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import Cockpit from './Cockpit'
 import FriendsList from './FriendsList'
-import FindFriend from './FriendsList/FindFriend'
+import FindFriend from './FindFriend'
 import uid from '../lib'
 
 class App extends React.Component {
@@ -98,9 +98,7 @@ class App extends React.Component {
           refOfInput={this.refOfInput}
         />
         {this.popDialogue
-          ? <FindFriend
-            find={this.find}
-          />
+          ? <FindFriend />
           : ''
         }
       </div>
