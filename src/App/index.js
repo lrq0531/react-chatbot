@@ -1,11 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 
 import Cockpit from './Cockpit'
 import FriendsList from './FriendsList'
-import FindFriend from './FindFriend'
 import uid from '../lib'
+import { toFindFriend } from '../reducer/cockpit/actions'
 
 class App extends React.Component {
   constructor(props) {
@@ -51,15 +52,11 @@ class App extends React.Component {
   }
 
   findFriend = () => {
-    /* test codes */
-    this.popDialogue = true
-    this.setState({})
-    this.inputRef.focus()
+    this.props.gotoFindFriendUrl()
   }
 
   refOfInput = input => {
     this.inputRef = input
-    // this.inputRef.focus()
   }
 
   receiveMessageFromFriend = message => {
@@ -97,10 +94,6 @@ class App extends React.Component {
           messagesWithAFriend={this.getChattingList()}
           refOfInput={this.refOfInput}
         />
-        {this.popDialogue
-          ? <FindFriend />
-          : ''
-        }
       </div>
     )
   }
@@ -109,6 +102,7 @@ class App extends React.Component {
 App.propTypes = {
   allFriends: PropTypes.object.isRequired,
   friend: PropTypes.string.isRequired,
+  gotoFindFriendUrl: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -116,4 +110,8 @@ const mapStateToProps = state => ({
   allFriends: state.cockpit.allFriends,
 })
 
-export default connect(mapStateToProps, null)(App)
+const mapDispatchToProps = dispatch => ({
+  gotoFindFriendUrl: bindActionCreators(toFindFriend, dispatch),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

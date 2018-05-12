@@ -1,3 +1,5 @@
+import { push } from 'react-router-redux'
+
 import uid from '../../lib'
 
 export const SEND_MESSAGE = 'COCKPIT/SEND_MESSAGE'
@@ -27,3 +29,5 @@ export const findFriend = friend => ({
     uid: uid(),
   },
 })
+
+export const toFindFriend = () => push('/find-friend')

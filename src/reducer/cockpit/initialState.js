@@ -1,4 +1,4 @@
-export const initCockpit = {
+export const initialState = {
   message: '',
   friend: 'Me',
   allFriends: {

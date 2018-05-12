@@ -1,13 +1,13 @@
 import * as actions from './actions'
 import { addNewMessage } from './cockpitOperations'
-import { initCockpit } from './initState'
+import { initialState } from './initialState'
 
-const cockpit = (state = initCockpit, action) => {
-  switch (action.type) {
+const cockpit = (state = initialState, { payload, type } = {}) => {
+  switch (type) {
     case actions.TYPE_MESSAGE:
       return ({
         ...state,
-        message: action.payload.message,
+        message: payload.message,
       })
 
     case actions.SEND_MESSAGE:
@@ -15,26 +15,26 @@ const cockpit = (state = initCockpit, action) => {
         ...state,
         allFriends: {
           ...state.allFriends,
-          [action.payload.to]: {
-            ...state.allFriends[action.payload.to],
+          [payload.to]: {
+            ...state.allFriends[payload.to],
             allMessages: addNewMessage(
-              action.payload.message,
-              action.payload.speaker,
-              state.allFriends[action.payload.to].allMessages,
+              payload.message,
+              payload.speaker,
+              state.allFriends[payload.to].allMessages,
             ),
           },
         },
-        message: (action.payload.speaker === 'me' ? '' : state.messageValue),
+        message: (payload.speaker === 'me' ? '' : state.messageValue),
       })
 
     case actions.FIND_FRIEND:
       return ({
         ...state,
-        friend: action.payload.uid,
+        friend: payload.uid,
         allFriends: {
           ...state.allFriends,
-          [action.payload.uid]: {
-            friendName: action.payload.friend,
+          [payload.uid]: {
+            friendName: payload.friend,
             allMessages: [],
           },
         },
