@@ -5,6 +5,8 @@ const MessageBar = props => {
   const style = {
     color: (props.speaker === 'me' ? 'blue' : 'purple'),
     fontsize: '32px',
+    display: 'flex',
+    justifyContent: (props.speaker === 'me' ? 'flex-end' : 'flex-start'),
   }
 
   return (

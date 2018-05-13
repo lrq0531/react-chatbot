@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { withRouter } from 'react-router'
 
 import Form from './Form'
 
@@ -24,4 +25,4 @@ const FindFriend = () => (
   )
 )
 
-export default FindFriend
+export default withRouter(FindFriend)

@@ -12,20 +12,13 @@ const style = {
 
 const Cockpit = props => (
   <div style={style}>
-    <Conversations
-      messagesWithAFriend={props.messagesWithAFriend}
-    />
+    <Conversations />
     <WriteMessage refOfInput={props.refOfInput} />
   </div>
 )
 
 Cockpit.propTypes = {
   refOfInput: PropTypes.func.isRequired,
-  messagesWithAFriend: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-    speaker: PropTypes.string.isRequired,
-  })).isRequired,
 }
 
 export default Cockpit

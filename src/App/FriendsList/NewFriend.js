@@ -1,14 +1,30 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 
-const NewFriend = ({ onAddNewFriend }) => (
-  <button onClick={onAddNewFriend}>
-    <b>+</b>
-  </button>
-)
+import { toFindFriend } from '../../reducer/cockpit/actions'
 
-NewFriend.propTypes = {
-  onAddNewFriend: PropTypes.func.isRequired,
+class NewFriend extends React.Component {
+  onClick = () => {
+    this.props.dispatchFindFriendUrl()
+  }
+
+  render() {
+    return (
+      <button onClick={this.onClick}>
+        <b>+</b>
+      </button>
+    )
+  }
 }
 
-export default NewFriend
+NewFriend.propTypes = {
+  dispatchFindFriendUrl: PropTypes.func.isRequired,
+}
+
+const mapDispatchToProps = dispatch => ({
+  dispatchFindFriendUrl: bindActionCreators(toFindFriend, dispatch),
+})
+
+export default connect(null, mapDispatchToProps)(NewFriend)

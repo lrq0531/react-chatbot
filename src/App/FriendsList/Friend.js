@@ -1,15 +1,37 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
-const Friend = props => (
-  <button onClick={props.onClickFriend}>
-    {props.friendName}
-  </button>
-)
+import { pickFriend } from '../../reducer/cockpit/actions'
 
-Friend.propTypes = {
-  onClickFriend: PropTypes.func.isRequired,
-  friendName: PropTypes.string.isRequired,
+class Friend extends React.Component {
+  onClick = () => {
+    const { dispatchPickFriend, friendId } = this.props
+    dispatchPickFriend(friendId)
+  }
+
+  render() {
+    return (
+      <button onClick={this.onClick}>
+        {this.props.friendName}
+      </button>
+    )
+  }
 }
 
-export default Friend
+Friend.propTypes = {
+  dispatchPickFriend: PropTypes.func.isRequired,
+  friendName: PropTypes.string.isRequired,
+  friendId: PropTypes.string.isRequired,
+}
+
+const mapStateToProps = ({ cockpit }, ownProps) => ({
+  friendName: cockpit.allFriends[ownProps.friendId].friendName,
+})
+
+const mapDispatchToProps = dispatch => ({
+  dispatchPickFriend: bindActionCreators(pickFriend, dispatch),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Friend)

@@ -16,10 +16,10 @@ class Form extends React.Component {
   }
 
   onSubmit = event => {
-    const { find } = this.props
+    const { dispatchFindFriend } = this.props
     event.preventDefault()
     const friend = event.target[0].value
-    find(friend)
+    dispatchFindFriend(friend)
   }
 
   render() {
@@ -45,11 +45,11 @@ class Form extends React.Component {
 }
 
 Form.propTypes = {
-  find: PropTypes.func.isRequired,
+  dispatchFindFriend: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = dispatch => ({
-  find: bindActionCreators(findFriend, dispatch),
+  dispatchFindFriend: bindActionCreators(findFriend, dispatch),
 })
 
 export default connect(null, mapDispatchToProps)(Form)

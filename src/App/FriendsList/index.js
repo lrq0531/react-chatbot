@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import mapKeys from 'lodash/mapKeys'
 
 import Friend from './Friend'
@@ -18,8 +19,7 @@ const FriendsList = props => {
   mapKeys(props.friendsList, (friend, id) => (
     friends.push(
       <Friend
-        onClickFriend={e => { props.onClickFriend(e, id) }}
-        friendName={friend.friendName}
+        friendId={id}
         key={id}
       />,
     )
@@ -30,15 +30,17 @@ const FriendsList = props => {
       <div style={style}>
         {friends}
       </div>
-      <NewFriend onAddNewFriend={props.onAddNewFriend} />
+      <NewFriend />
     </div>
   )
 }
 
 FriendsList.propTypes = {
-  onAddNewFriend: PropTypes.func.isRequired,
-  onClickFriend: PropTypes.func.isRequired,
   friendsList: PropTypes.object.isRequired,
 }
 
-export default FriendsList
+const mapStateToProps = ({ cockpit }) => ({
+  friendsList: cockpit.allFriends,
+})
+
+export default connect(mapStateToProps, null)(FriendsList)

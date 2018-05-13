@@ -40,6 +40,12 @@ const cockpit = (state = initialState, { payload, type } = {}) => {
         },
       })
 
+    case actions.PICK_FRIEND:
+      return ({
+        ...state,
+        friend: payload.uid,
+      })
+
     default:
       return state
   }

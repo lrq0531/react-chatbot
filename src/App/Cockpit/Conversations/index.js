@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 import MessageBar from './MessageBar'
 
@@ -9,9 +10,9 @@ const style = {
   marginLeft: '10px',
 }
 
-const Conversations = props => (
+const Conversations = ({ messages }) => (
   <div style={style}>
-    {props.messagesWithAFriend.map(message => (
+    {messages.map(message => (
       <MessageBar
         key={message.id}
         displayMessage={message.content}
@@ -22,11 +23,15 @@ const Conversations = props => (
 )
 
 Conversations.propTypes = {
-  messagesWithAFriend: PropTypes.arrayOf(PropTypes.shape({
+  messages: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
     speaker: PropTypes.string.isRequired,
   })).isRequired,
 }
 
-export default Conversations
+const mapStateToProps = ({ cockpit }) => ({
+  messages: cockpit.allFriends[cockpit.friend].allMessages,
+})
+
+export default connect(mapStateToProps, null)(Conversations)
