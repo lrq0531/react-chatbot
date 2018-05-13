@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { findFriend } from '../../reducer/cockpit/actions'
+import { findFriend, leaveFindFriend } from '../../reducer/cockpit/actions'
 
 class Form extends React.Component {
   constructor(props) {
@@ -16,10 +16,11 @@ class Form extends React.Component {
   }
 
   onSubmit = event => {
-    const { dispatchFindFriend } = this.props
+    const { dispatchFindFriend, dispatchLeaveFindFriend } = this.props
     event.preventDefault()
     const friend = event.target[0].value
     dispatchFindFriend(friend)
+    dispatchLeaveFindFriend()
   }
 
   render() {
@@ -46,10 +47,12 @@ class Form extends React.Component {
 
 Form.propTypes = {
   dispatchFindFriend: PropTypes.func.isRequired,
+  dispatchLeaveFindFriend: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = dispatch => ({
   dispatchFindFriend: bindActionCreators(findFriend, dispatch),
+  dispatchLeaveFindFriend: bindActionCreators(leaveFindFriend, dispatch),
 })
 
 export default connect(null, mapDispatchToProps)(Form)
