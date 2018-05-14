@@ -31,13 +31,13 @@ export const findFriend = friend => ({
   },
 })
 
-export const toFindFriend = () => push('/find-friend')
-
-export const leaveFindFriend = () => goBack()
-
 export const pickFriend = friendId => ({
   type: PICK_FRIEND,
   payload: {
     uid: friendId,
   },
 })
+
+export const toFindFriend = () => push('/find-friend')
+
+export const leaveFindFriend = () => goBack()

@@ -1,5 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
+import { windowResize } from '../reducer/webController/actions'
 import Cockpit from './Cockpit'
 import FriendsList from './FriendsList'
 
@@ -8,7 +12,7 @@ class App extends React.Component {
     super(props)
 
     window.addEventListener('resize', () => {
-      this.setState({})
+      props.dispatchWindowResize()
     })
   }
 
@@ -22,10 +26,11 @@ class App extends React.Component {
       maxWidth: '90%',
       margin: 'auto',
       zIndex: -1,
+      height: this.props.height,
     }
 
     return (
-      <div style={{ ...style, height: (document.documentElement.clientHeight * 0.96) }}>
+      <div style={style}>
         <FriendsList />
         <Cockpit refOfInput={this.refOfInput} />
       </div>
@@ -33,4 +38,17 @@ class App extends React.Component {
   }
 }
 
-export default App
+App.propTypes = {
+  height: PropTypes.number.isRequired,
+  dispatchWindowResize: PropTypes.func.isRequired,
+}
+
+const mapStateToProps = ({ webController }) => ({
+  height: webController.height,
+})
+
+const mapDispatchToProps = dispatch => ({
+  dispatchWindowResize: bindActionCreators(windowResize, dispatch),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
