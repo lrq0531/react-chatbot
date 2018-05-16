@@ -11,9 +11,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
 
-    window.addEventListener('resize', () => {
-      props.dispatchWindowResize()
-    })
+    window.addEventListener('resize', props.dispatchWindowResize)
   }
 
   refOfInput = input => {
