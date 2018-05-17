@@ -31,7 +31,6 @@ class WriteMessage extends React.Component {
         <EditMessage
           message={this.props.message}
           onChangeMessage={this.onChangeMessage}
-          refOfInput={this.props.refOfInput}
         />
         <SendMessage />
       </form>
@@ -44,7 +43,6 @@ WriteMessage.propTypes = {
   friend: PropTypes.string.isRequired,
   dispatchTypeMessage: PropTypes.func.isRequired,
   dispatchSendMessage: PropTypes.func.isRequired,
-  refOfInput: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({

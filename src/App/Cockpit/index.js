@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import WriteMessage from './WriteMessage'
 import Conversations from './Conversations'
@@ -10,15 +9,11 @@ const style = {
   flexDirection: 'column',
 }
 
-const Cockpit = props => (
+const Cockpit = () => (
   <div style={style}>
     <Conversations />
-    <WriteMessage refOfInput={props.refOfInput} />
+    <WriteMessage />
   </div>
 )
-
-Cockpit.propTypes = {
-  refOfInput: PropTypes.func.isRequired,
-}
 
 export default Cockpit

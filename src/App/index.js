@@ -15,10 +15,6 @@ class App extends React.Component {
     window.addEventListener('resize', props.dispatchWindowResize)
   }
 
-  refOfInput = input => {
-    this.inputRef = input
-  }
-
   render() {
     const style = {
       display: 'flex',
@@ -31,7 +27,7 @@ class App extends React.Component {
     return (
       <div style={style}>
         <FriendsList />
-        <Cockpit refOfInput={this.refOfInput} />
+        <Cockpit />
         <RefController />
       </div>
     )

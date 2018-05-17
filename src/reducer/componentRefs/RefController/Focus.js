@@ -1,14 +1,14 @@
 import { connect } from 'react-redux'
 
-const Focus = ({ ref }) => {
-  if (typeof ref !== 'undefined') {
-    ref.focus()
+const Focus = ({ focusingRef }) => {
+  if (typeof focusingRef !== 'undefined' && focusingRef !== null) {
+    focusingRef.focus()
   }
   return ''
 }
 
 const mapStateToProps = ({ componentRefs }) => ({
-  ref: componentRefs.focusingRef,
+  focusingRef: componentRefs.focusingRef,
 })
 
 export default connect(mapStateToProps, null)(Focus)
