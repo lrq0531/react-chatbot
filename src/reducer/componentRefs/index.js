@@ -1,4 +1,5 @@
 import { ADD_REF, SET_TO_FOCUS, ADD_TYPE_MAP, ADD_FUNC_MAP } from './actions'
+import { initialState } from './initialState'
 
 const getRefAccordingToActionType = (state, type, payload) => {
   const refName = state.mapToRefName[type]
@@ -14,7 +15,7 @@ const getRefAccordingToActionType = (state, type, payload) => {
   return state.focusingRef
 }
 
-const componentRefs = (state, { type, payload }) => {
+const componentRefs = (state = initialState, { type, payload }) => {
   switch (type) {
     case ADD_REF:
       return ({

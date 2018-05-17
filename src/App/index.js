@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux'
 import { windowResize } from '../reducer/webController/actions'
 import Cockpit from './Cockpit'
 import FriendsList from './FriendsList'
+import RefController from '../reducer/componentRefs/RefController'
 
 class App extends React.Component {
   constructor(props) {
@@ -31,6 +32,7 @@ class App extends React.Component {
       <div style={style}>
         <FriendsList />
         <Cockpit refOfInput={this.refOfInput} />
+        <RefController />
       </div>
     )
   }
