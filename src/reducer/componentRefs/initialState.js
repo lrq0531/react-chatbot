@@ -1,3 +1,5 @@
+import uid from '../../lib/index'
+
 export const initialState = {
   refs: {
     refName: null,
@@ -9,4 +11,5 @@ export const initialState = {
     /* 'action.type': payload => 'refName', */
   },
   focusingRef: null,
+  refChangeId: uid(),
 }

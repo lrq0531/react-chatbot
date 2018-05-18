@@ -9,6 +9,7 @@ const Focus = ({ focusingRef }) => {
 
 const mapStateToProps = ({ componentRefs }) => ({
   focusingRef: componentRefs.focusingRef,
+  refChangeId: componentRefs.refChangeId,
 })
 
 export default connect(mapStateToProps, null)(Focus)

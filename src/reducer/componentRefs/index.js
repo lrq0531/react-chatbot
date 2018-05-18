@@ -1,3 +1,4 @@
+import uid from '../../lib/index'
 import { ADD_REF, SET_TO_FOCUS, ADD_TYPE_MAP, ADD_FUNC_MAP } from './actions'
 import { initialState } from './initialState'
 
@@ -9,7 +10,7 @@ const getRefAccordingToActionType = (state, type, payload) => {
 
   const mapFunction = state.mapToFocusFunction[type]
   if (typeof mapFunction !== 'undefined') {
-    return state.refs[mapFunction(type, payload)]
+    return state.refs[mapFunction(payload)]
   }
 
   return state.focusingRef
@@ -29,6 +30,7 @@ const componentRefs = (state = initialState, { type, payload }) => {
       return ({
         ...state,
         focusingRef: state.refs[payload.refName],
+        refChangeId: uid(),
       })
     case ADD_TYPE_MAP:
       return ({
@@ -50,7 +52,8 @@ const componentRefs = (state = initialState, { type, payload }) => {
       const newFocusingRef = getRefAccordingToActionType(state, type, payload)
       return ({
         ...state,
-        focusingRef: typeof newFocusingRef !== 'undefined' ? newFocusingRef : state.focusingRef,
+        focusingRef: newFocusingRef,
+        refChangeId: uid(),
       })
     }
   }

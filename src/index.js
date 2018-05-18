@@ -10,6 +10,8 @@ import createHistory from 'history/createBrowserHistory'
 import reducer from './reducer'
 import App from './App'
 import FindFriend from './App/FindFriend'
+import RefController from './reducer/componentRefs/RefController'
+import ComponentFocusOrchestration from './App/ComponentFocusOrchestration'
 
 const history = createHistory()
 const routing = routerMiddleware(history)
@@ -27,6 +29,8 @@ ReactDOM.render(
       <div>
         <Route path="/" component={App} />
         <Route path="/find-friend" component={FindFriend} />
+        <RefController />
+        <ComponentFocusOrchestration />
       </div>
     </ConnectedRouter>
   </Provider>,

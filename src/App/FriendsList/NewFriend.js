@@ -7,7 +7,7 @@ import { toFindFriend } from '../../reducer/cockpit/actions'
 
 class NewFriend extends React.Component {
   onClick = () => {
-    this.props.dispatchFindFriendUrl()
+    this.props.dispatchToFindFriend()
   }
 
   render() {
@@ -20,11 +20,11 @@ class NewFriend extends React.Component {
 }
 
 NewFriend.propTypes = {
-  dispatchFindFriendUrl: PropTypes.func.isRequired,
+  dispatchToFindFriend: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = dispatch => ({
-  dispatchFindFriendUrl: bindActionCreators(toFindFriend, dispatch),
+  dispatchToFindFriend: bindActionCreators(toFindFriend, dispatch),
 })
 
 export default connect(null, mapDispatchToProps)(NewFriend)
