@@ -6,6 +6,22 @@ export const SEND_MESSAGE = 'COCKPIT/SEND_MESSAGE'
 export const TYPE_MESSAGE = 'COCKPIT/TYPE_MESSAGE'
 export const FIND_FRIEND = 'COCKPIT/FIND_FRIEND'
 export const PICK_FRIEND = 'COCKPIT/PICK_FRIEND'
+export const ONLINE_FRIENDS = 'COCKPIT/ONLINE_FRIENDS'
+export const UPDATE_ONLINE_FRIENDS = 'COCKPIT/UPDATE_ONLINE_FRIENDS'
+
+export const updateOnlineFriends = () => ({
+  type: UPDATE_ONLINE_FRIENDS,
+  payload: {
+    chatterId: 'Me',
+  },
+})
+
+export const onlineFriends = friends => ({
+  type: ONLINE_FRIENDS,
+  payload: {
+    onlineFriends: friends,
+  },
+})
 
 export const sendMessage = (message, speaker, to) => ({
   type: SEND_MESSAGE,

@@ -46,6 +46,26 @@ const cockpit = (state = initialState, { payload, type } = {}) => {
         friend: payload.uid,
       })
 
+    case actions.ONLINE_FRIENDS:
+      return ({
+        ...state,
+        allFriends: {
+          ...state.allFriends,
+          [payload.onlineFriends[0].id]: {
+            friendName: payload.onlineFriends[0].name,
+            allMessages: [],
+          },
+          [payload.onlineFriends[1].id]: {
+            friendName: payload.onlineFriends[1].name,
+            allMessages: [],
+          },
+          [payload.onlineFriends[2].id]: {
+            friendName: payload.onlineFriends[2].name,
+            allMessages: [],
+          },
+        }
+      })
+
     default:
       return state
   }

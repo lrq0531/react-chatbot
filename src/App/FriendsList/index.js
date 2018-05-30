@@ -5,6 +5,7 @@ import mapKeys from 'lodash/mapKeys'
 
 import Friend from './Friend'
 import NewFriend from './NewFriend'
+import OnlineFriends from './OnlineFriends'
 
 const style = {
   flex: 1,
@@ -31,6 +32,7 @@ const FriendsList = props => {
         {friends}
       </div>
       <NewFriend />
+      <OnlineFriends />
     </div>
   )
 }

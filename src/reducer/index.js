@@ -1,15 +1,20 @@
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
 
+import { all, fork } from 'redux-saga/effects'
+
 import cockpit from './cockpit'
 import webController from './webController'
 import componentRefs from './componentRefs'
+import { updateOnlineFriendsListener } from './cockpit/sagas'
 
-const reducer = combineReducers({
+export const reducer = combineReducers({
   cockpit,
   routerReducer,
   webController,
   componentRefs,
 })
 
-export default reducer
+export function* sagaRoot() {
+  yield all([fork(updateOnlineFriendsListener)])
+}
