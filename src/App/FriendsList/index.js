@@ -2,10 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import mapKeys from 'lodash/mapKeys'
+import { bindActionCreators } from 'redux'
 
 import Friend from './Friend'
-import NewFriend from './NewFriend'
-import OnlineFriends from './OnlineFriends'
+import RCBButton from '../../component/RCBButton'
+import { updateOnlineFriends, toFindFriend } from '../../reducer/cockpit/actions'
 
 const style = {
   flex: 1,
@@ -31,18 +32,25 @@ const FriendsList = props => {
       <div style={style}>
         {friends}
       </div>
-      <NewFriend />
-      <OnlineFriends />
+      <RCBButton name="+" onClick={props.dispatchToFindFriend} />
+      <RCBButton name="Update" onClick={props.dispatchUpdateOnlineFriends} />
     </div>
   )
 }
 
 FriendsList.propTypes = {
   friendsList: PropTypes.object.isRequired,
+  dispatchUpdateOnlineFriends: PropTypes.func.isRequired,
+  dispatchToFindFriend: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = ({ cockpit }) => ({
   friendsList: cockpit.allFriends,
 })
 
-export default connect(mapStateToProps, null)(FriendsList)
+const mapDispatchToProps = dispatch => ({
+  dispatchToFindFriend: bindActionCreators(toFindFriend, dispatch),
+  dispatchUpdateOnlineFriends: bindActionCreators(updateOnlineFriends, dispatch),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(FriendsList)
