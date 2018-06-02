@@ -8,11 +8,20 @@ export const FIND_FRIEND = 'COCKPIT/FIND_FRIEND'
 export const PICK_FRIEND = 'COCKPIT/PICK_FRIEND'
 export const ONLINE_FRIENDS = 'COCKPIT/ONLINE_FRIENDS'
 export const UPDATE_ONLINE_FRIENDS = 'COCKPIT/UPDATE_ONLINE_FRIENDS'
+export const UPDATE_MESSAGE = 'COCKPIT/UPDATE_MESSAGE'
+export const NEW_MESSAGES = 'COCKPIT/NEW_MESSAGES'
 
-export const updateOnlineFriends = () => ({
+export const updateOnlineFriends = chatterId => ({
   type: UPDATE_ONLINE_FRIENDS,
   payload: {
-    chatterId: 'Me',
+    chatterId,
+  },
+})
+
+export const updateMessage = chatterId => ({
+  type: UPDATE_MESSAGE,
+  payload: {
+    chatterId,
   },
 })
 
@@ -20,6 +29,13 @@ export const onlineFriends = friends => ({
   type: ONLINE_FRIENDS,
   payload: {
     onlineFriends: friends,
+  },
+})
+
+export const newMessages = messages => ({
+  type: NEW_MESSAGES,
+  payload: {
+    messages,
   },
 })
 

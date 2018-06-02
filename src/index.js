@@ -13,6 +13,7 @@ import App from './App'
 import FindFriend from './App/FindFriend'
 import RefController from './reducer/componentRefs/RefController'
 import ComponentFocusOrchestration from './App/ComponentFocusOrchestration'
+import Tasks from './App/Tasks'
 
 const history = createHistory()
 const routing = routerMiddleware(history)
@@ -34,8 +35,10 @@ ReactDOM.render(
       <div>
         <Route path="/" component={App} />
         <Route path="/find-friend" component={FindFriend} />
+        {/* manager components */}
         <RefController />
         <ComponentFocusOrchestration />
+        <Tasks />
       </div>
     </ConnectedRouter>
   </Provider>,

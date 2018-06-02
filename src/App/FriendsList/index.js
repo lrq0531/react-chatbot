@@ -33,7 +33,7 @@ const FriendsList = props => {
         {friends}
       </div>
       <RCBButton name="+" onClick={props.dispatchToFindFriend} />
-      <RCBButton name="Update" onClick={props.dispatchUpdateOnlineFriends} />
+      <RCBButton name="Update" onClick={() => { props.dispatchUpdateOnlineFriends('Me') }} />
     </div>
   )
 }

@@ -6,7 +6,7 @@ import { all, fork } from 'redux-saga/effects'
 import cockpit from './cockpit'
 import webController from './webController'
 import componentRefs from './componentRefs'
-import { updateOnlineFriendsListener } from './cockpit/sagas'
+import { updateOnlineFriendsListener, updateMessagesListener } from './cockpit/sagas'
 
 export const reducer = combineReducers({
   cockpit,
@@ -16,5 +16,8 @@ export const reducer = combineReducers({
 })
 
 export function* sagaRoot() {
-  yield all([fork(updateOnlineFriendsListener)])
+  yield all([
+    fork(updateOnlineFriendsListener),
+    fork(updateMessagesListener),
+  ])
 }
