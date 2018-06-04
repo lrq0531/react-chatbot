@@ -36,6 +36,7 @@ const cockpit = (state = initialState, { payload, type } = {}) => {
           [payload.uid]: {
             friendName: payload.friend,
             allMessages: [],
+            online: true,
           },
         },
       })
@@ -54,16 +55,19 @@ const cockpit = (state = initialState, { payload, type } = {}) => {
           [payload.onlineFriends[0].id]: {
             friendName: payload.onlineFriends[0].name,
             allMessages: [],
+            online: payload.onlineFriends[0].online,
           },
           [payload.onlineFriends[1].id]: {
             friendName: payload.onlineFriends[1].name,
             allMessages: [],
+            online: payload.onlineFriends[1].online,
           },
           [payload.onlineFriends[2].id]: {
             friendName: payload.onlineFriends[2].name,
             allMessages: [],
+            online: payload.onlineFriends[2].online,
           },
-        }
+        },
       })
 
     default:

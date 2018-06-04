@@ -12,8 +12,12 @@ class Friend extends React.Component {
   }
 
   render() {
+    const style = {
+      backgroundColor: this.props.online ? '#4CAF50' : '',
+      color: this.props.online ? 'white' : 'black',
+    }
     return (
-      <button onClick={this.onClick}>
+      <button style={style} onClick={this.onClick}>
         {this.props.friendName}
       </button>
     )
@@ -24,10 +28,12 @@ Friend.propTypes = {
   dispatchPickFriend: PropTypes.func.isRequired,
   friendName: PropTypes.string.isRequired,
   friendId: PropTypes.string.isRequired,
+  online: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = ({ cockpit }, ownProps) => ({
   friendName: cockpit.allFriends[ownProps.friendId].friendName,
+  online: cockpit.allFriends[ownProps.friendId].online,
 })
 
 const mapDispatchToProps = dispatch => ({

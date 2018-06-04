@@ -3,9 +3,9 @@ export const initialState = {
   friend: 'Me',
   allFriends: {
     Me: {
+      online: true,
       friendName: 'Me',
       allMessages: [],
     },
   },
-  inputRef: 'undefined',
 }
