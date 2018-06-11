@@ -9,7 +9,7 @@ import RCBButton from '../../component/RCBButton'
 import { updateOnlineFriends, toFindFriend } from '../../reducer/cockpit/actions'
 
 const style = {
-  flex: 1,
+  flex: 2,
   display: 'flex',
   flexDirection: 'column',
   overflowY: 'auto',
