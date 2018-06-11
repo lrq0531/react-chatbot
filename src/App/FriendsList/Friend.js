@@ -30,7 +30,15 @@ class Friend extends React.Component {
     const style = {
       backgroundColor: currentChatter === friendId ? 'pink' : onlineBackgroundColor,
       color: (online || currentChatter === friendId) ? 'white' : 'black',
-      flex: 3,
+      flex: 5,
+    }
+
+    const unreadStyle = {
+      backgroundColor: currentChatter === friendId ? 'pink' : onlineBackgroundColor,
+      color: (online || currentChatter === friendId) ? 'white' : 'black',
+      flex: 1,
+      display: 'flex',
+      justifyContent: 'center',
     }
 
     return (
@@ -38,7 +46,7 @@ class Friend extends React.Component {
         <button style={style} onClick={this.onClick}>
           {friendName}
         </button>
-        {unread > 0 ? <div>{unread}</div> : ''}
+        {unread > 0 ? <div style={unreadStyle}>{unread}</div> : ''}
       </div>
     )
   }
