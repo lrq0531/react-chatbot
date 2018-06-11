@@ -26,16 +26,19 @@ class Friend extends React.Component {
       borderWidth: '0px 0px 0.1px 0px',
     }
 
-    const onlineBackgroundColor = online ? '#4CAF50' : ''
+    const color = (online || currentChatter === friendId) ? 'blue' : 'black'
+    const onlineBackgroundColor = online ? '' : ''
+    // const onlineBackgroundColor = online ? '#4CAF50' : ''
+    const backgroundColor = currentChatter === friendId ? 'pink' : onlineBackgroundColor
     const style = {
-      backgroundColor: currentChatter === friendId ? 'pink' : onlineBackgroundColor,
-      color: (online || currentChatter === friendId) ? 'white' : 'black',
+      backgroundColor,
+      color,
       flex: 5,
     }
 
     const unreadStyle = {
-      backgroundColor: currentChatter === friendId ? 'pink' : onlineBackgroundColor,
-      color: (online || currentChatter === friendId) ? 'white' : 'black',
+      backgroundColor,
+      color,
       flex: 1,
       display: 'flex',
       justifyContent: 'center',
