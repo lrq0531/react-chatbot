@@ -1,5 +1,5 @@
 import * as actions from './actions'
-import { addNewMessage } from './cockpitOperations'
+import { addNewMessage, concatenateMessages } from './cockpitOperations'
 import { initialState } from './initialState'
 
 const cockpit = (state = initialState, { payload, type } = {}) => {
@@ -45,6 +45,13 @@ const cockpit = (state = initialState, { payload, type } = {}) => {
       return ({
         ...state,
         friend: payload.uid,
+        allFriends: {
+          ...state.allFriends,
+          [payload.uid]: {
+            ...state.allFriends[payload.uid],
+            unread: 0,
+          },
+        },
       })
 
     case actions.ONLINE_FRIENDS:
@@ -53,23 +60,28 @@ const cockpit = (state = initialState, { payload, type } = {}) => {
         allFriends: {
           ...state.allFriends,
           [payload.onlineFriends[0].id]: {
+            ...state.allFriends[payload.onlineFriends[0].id],
             friendName: payload.onlineFriends[0].name,
-            allMessages: [],
             online: payload.onlineFriends[0].online,
           },
           [payload.onlineFriends[1].id]: {
+            ...state.allFriends[payload.onlineFriends[1].id],
             friendName: payload.onlineFriends[1].name,
-            allMessages: [],
             online: payload.onlineFriends[1].online,
           },
           [payload.onlineFriends[2].id]: {
+            ...state.allFriends[payload.onlineFriends[2].id],
             friendName: payload.onlineFriends[2].name,
-            allMessages: [],
             online: payload.onlineFriends[2].online,
           },
         },
       })
 
+    case actions.NEW_MESSAGES:
+      return ({
+        ...state,
+        allFriends: concatenateMessages(state.allFriends, payload.messages, state.friend),
+      })
     default:
       return state
   }

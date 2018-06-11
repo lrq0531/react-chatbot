@@ -5,7 +5,14 @@ export const initialState = {
     Me: {
       online: true,
       friendName: 'Me',
-      allMessages: [],
+      allMessages: [
+        {
+          id: 'Me',
+          content: 'Welcome back, Me!',
+          speaker: 'Me',
+        },
+      ],
+      unread: 0,
     },
   },
 }

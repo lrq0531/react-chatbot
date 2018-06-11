@@ -12,13 +12,13 @@ const style = {
 
 const Conversations = ({ messages }) => (
   <div style={style}>
-    {messages.map(message => (
+    {typeof messages !== 'undefined' ? messages.map(message => (
       <MessageBar
         key={message.id}
         displayMessage={message.content}
         speaker={message.speaker}
       />
-    ))}
+    )) : ''}
   </div>
 )
 

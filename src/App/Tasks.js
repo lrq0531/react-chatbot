@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { updateOnlineFriends, updateMessage } from '../reducer/cockpit/actions'
 
 const Tasks = props => {
-  setInterval(props.dispatchUpdateMessage, 3000, 'Me')
+  setInterval(props.dispatchUpdateMessage, 10000, 'Me')
   setInterval(props.dispatchUpdateOnlineFriends, 5000, 'Me')
   return ''
 }
