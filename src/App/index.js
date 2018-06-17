@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import Radium from 'radium'
 
 import { windowResize } from '../reducer/webController/actions'
 import Cockpit from './Cockpit'
@@ -16,15 +17,22 @@ class App extends React.Component {
 
   render() {
     const style = {
-      display: 'flex',
-      maxWidth: '90%',
-      margin: 'auto',
-      zIndex: -1,
-      height: this.props.height,
+      layout: {
+        display: 'flex',
+        margin: 'auto',
+      },
+
+      layer: {
+        zIndex: -1,
+      },
+      windowSize: {
+        maxWidth: '90%',
+        height: this.props.height,
+      },
     }
 
     return (
-      <div style={style}>
+      <div style={[style.layout, style.layer, style.windowSize]}>
         <FriendsList />
         <Cockpit />
       </div>
@@ -45,4 +53,4 @@ const mapDispatchToProps = dispatch => ({
   dispatchWindowResize: bindActionCreators(windowResize, dispatch),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(Radium(App))

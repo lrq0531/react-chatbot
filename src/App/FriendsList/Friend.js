@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import Radium from 'radium'
 
 import { pickFriend } from '../../reducer/cockpit/actions'
 
@@ -27,13 +28,16 @@ class Friend extends React.Component {
     }
 
     const color = (online || currentChatter === friendId) ? 'blue' : 'black'
+    const fontWeight = (online || currentChatter === friendId) ? 'bold' : ''
     const onlineBackgroundColor = online ? '' : ''
     // const onlineBackgroundColor = online ? '#4CAF50' : ''
     const backgroundColor = currentChatter === friendId ? 'pink' : onlineBackgroundColor
     const style = {
       backgroundColor,
       color,
+      fontWeight,
       flex: 5,
+      transition: 'all 700ms ease-out',
     }
 
     const unreadStyle = {
@@ -77,4 +81,4 @@ const mapDispatchToProps = dispatch => ({
   dispatchPickFriend: bindActionCreators(pickFriend, dispatch),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Friend)
+export default connect(mapStateToProps, mapDispatchToProps)(Radium(Friend))
