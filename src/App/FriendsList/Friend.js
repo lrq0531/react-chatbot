@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import Radium from 'radium'
+import { StyleSheet, css, minify } from 'aphrodite'
 
 import { pickFriend } from '../../reducer/cockpit/actions'
 
@@ -21,39 +21,42 @@ class Friend extends React.Component {
       unread,
     } = this.props
 
-    const divStyle = {
-      display: 'flex',
-      borderStyle: 'solid',
-      borderWidth: '0px 0px 0.1px 0px',
-    }
-
     const color = (online || currentChatter === friendId) ? 'blue' : 'black'
     const fontWeight = (online || currentChatter === friendId) ? 'bold' : ''
     const onlineBackgroundColor = online ? '' : ''
     // const onlineBackgroundColor = online ? '#4CAF50' : ''
     const backgroundColor = currentChatter === friendId ? 'pink' : onlineBackgroundColor
-    const style = {
-      backgroundColor,
-      color,
-      fontWeight,
-      flex: 5,
-      transition: 'all 700ms ease-out',
-    }
 
-    const unreadStyle = {
-      backgroundColor,
-      color,
-      flex: 1,
-      display: 'flex',
-      justifyContent: 'center',
-    }
+    // Always keep the full style names
+    minify(false)
+    const styles = StyleSheet.create({
+      divStyle: {
+        display: 'flex',
+        borderStyle: 'solid',
+        borderWidth: '0px 0px 0.1px 0px',
+      },
+      friendStyle: {
+        backgroundColor,
+        color,
+        fontWeight,
+        flex: 5,
+        transition: 'all 1000ms ease-out',
+      },
+      unreadStyle: {
+        backgroundColor,
+        color,
+        flex: 1,
+        display: 'flex',
+        justifyContent: 'center',
+      },
+    })
 
     return (
-      <div style={divStyle}>
-        <button style={style} onClick={this.onClick}>
+      <div className={css(styles.divStyle)}>
+        <button className={css(styles.friendStyle)} onClick={this.onClick}>
           {friendName}
         </button>
-        {unread > 0 ? <div style={unreadStyle}>{unread}</div> : ''}
+        {unread > 0 ? <div className={css(styles.unreadStyle)}>{unread}</div> : ''}
       </div>
     )
   }
@@ -81,4 +84,4 @@ const mapDispatchToProps = dispatch => ({
   dispatchPickFriend: bindActionCreators(pickFriend, dispatch),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Radium(Friend))
+export default connect(mapStateToProps, mapDispatchToProps)(Friend)
