@@ -23,9 +23,33 @@ class Friend extends React.Component {
 
     const color = (online || currentChatter === friendId) ? 'blue' : 'black'
     const fontWeight = (online || currentChatter === friendId) ? 'bold' : ''
-    const onlineBackgroundColor = online ? '' : ''
-    // const onlineBackgroundColor = online ? '#4CAF50' : ''
+    // const onlineBackgroundColor = online ? '' : ''
+    const onlineBackgroundColor = online ? '#4CAF50' : 'grey'
     const backgroundColor = currentChatter === friendId ? 'pink' : onlineBackgroundColor
+
+    const animationMove = {
+      from: {
+        position: 'absolute',
+        bottom: '10%',
+        display: 'flex',
+      },
+      to: {
+        position: 'absolute',
+        bottom: '66.14%',
+      },
+    }
+
+    const animationFlash = {
+      '0%': {
+        backgroundColor,
+      },
+      '50%': {
+        backgroundColor: 'red',
+      },
+      '100%': {
+        backgroundColor,
+      },
+    }
 
     // Always keep the full style names
     minify(false)
@@ -40,7 +64,6 @@ class Friend extends React.Component {
         color,
         fontWeight,
         flex: 5,
-        transition: 'all 1000ms ease-out',
       },
       unreadStyle: {
         backgroundColor,
@@ -49,11 +72,26 @@ class Friend extends React.Component {
         display: 'flex',
         justifyContent: 'center',
       },
+      animationMoveStyle: {
+        animationName: [animationMove],
+        animationDuration: '2s',
+        animationTimingFunction: 'ease',
+      },
+      animationFlashStyle: {
+        animationName: [animationFlash],
+        animationDuration: '5s',
+        animationTimingFunction: 'liner',
+        animationIterationCount: 'infinite',
+        animationDirection: 'alternate',
+      },
     })
 
     return (
-      <div className={css(styles.divStyle)}>
-        <button className={css(styles.friendStyle)} onClick={this.onClick}>
+      <div className={css(styles.divStyle, styles.animationMoveStyle)}>
+        <button
+          className={css(styles.friendStyle, styles.animationFlashStyle)}
+          onClick={this.onClick}
+        >
           {friendName}
         </button>
         {unread > 0 ? <div className={css(styles.unreadStyle)}>{unread}</div> : ''}
