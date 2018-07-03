@@ -1,0 +1,14 @@
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+html,  body,  #root {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+input, body {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 20px;
+}

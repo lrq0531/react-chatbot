@@ -84,12 +84,18 @@ class Friend extends React.Component {
         animationIterationCount: 'infinite',
         animationDirection: 'alternate',
       },
+      hoverStyle: {
+        ':hover': {
+          backgroundColor: 'purple',
+          transition: 'all 5s ease',
+        },
+      },
     })
 
     return (
       <div className={css(styles.divStyle, styles.animationMoveStyle)}>
         <button
-          className={css(styles.friendStyle, styles.animationFlashStyle)}
+          className={css(styles.friendStyle, online && styles.animationFlashStyle)}
           onClick={this.onClick}
         >
           {friendName}
