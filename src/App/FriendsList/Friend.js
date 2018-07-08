@@ -86,8 +86,8 @@ class Friend extends React.Component {
       },
       hoverStyle: {
         ':hover': {
-          backgroundColor: 'purple',
-          transition: 'all 5s ease',
+          transform: 'rotateX(360deg)',
+          transition: 'all 3s ease',
         },
       },
     })
@@ -95,7 +95,11 @@ class Friend extends React.Component {
     return (
       <div className={css(styles.divStyle, styles.animationMoveStyle)}>
         <button
-          className={css(styles.friendStyle, online && styles.animationFlashStyle)}
+          className={css(
+            styles.friendStyle,
+            online && styles.animationFlashStyle,
+            styles.hoverStyle,
+          )}
           onClick={this.onClick}
         >
           {friendName}
