@@ -10,17 +10,35 @@ const style = {
   marginLeft: '10px',
 }
 
-const Conversations = ({ messages }) => (
-  <div style={style}>
-    {typeof messages !== 'undefined' ? messages.map(message => (
-      <MessageBar
-        key={message.id}
-        displayMessage={message.content}
-        speaker={message.speaker}
-      />
-    )) : ''}
-  </div>
-)
+class Conversations extends React.Component {
+  /* Setting scrollTop should be done after render method, to use the decided scrollTop value.
+  Otherwise, the value will be overwrite by render() */
+  componentDidUpdate() {
+    if (typeof this.refOfCom !== 'undefined') {
+      this.refOfCom.scrollTop += 10000
+    }
+  }
+
+  refOfConversation = ref => {
+    this.refOfCom = ref
+  }
+
+  render() {
+    const { messages } = this.props
+
+    return (
+      <div ref={this.refOfConversation} style={style}>
+        {typeof messages !== 'undefined' ? messages.map(message => (
+          <MessageBar
+            key={message.id}
+            displayMessage={message.content}
+            speaker={message.speaker}
+          />
+        )) : ''}
+      </div>
+    )
+  }
+}
 
 Conversations.propTypes = {
   messages: PropTypes.arrayOf(PropTypes.shape({
