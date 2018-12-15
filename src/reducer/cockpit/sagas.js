@@ -1,9 +1,9 @@
 import { put, call, take, fork } from 'redux-saga/effects'
 
 import { onlineFriends, newMessages, UPDATE_ONLINE_FRIENDS, UPDATE_MESSAGE } from './actions'
+import { server } from '../serverAdd'
 
-//const fetchOnlineFriends = chatterId => fetch(`http://swift-parrot-58.localtunnel.me/onlineFriends?chatterId=${chatterId}`)
-const fetchOnlineFriends = chatterId => fetch(`http://192.168.20.12:8090/onlineFriends?chatterId=${chatterId}`)
+const fetchOnlineFriends = chatterId => fetch(`${server}/onlineFriends?chatterId=${chatterId}`)
   .then(response => response.json())
   .then(data => data)
 
@@ -19,8 +19,7 @@ export function* updateOnlineFriendsListener() {
   }
 }
 
-const fetchMessages = chatterId => fetch(`http://192.168.20.12:8090/messages?chatterId=${chatterId}`)
-//const fetchMessages = chatterId => fetch(`http://swift-parrot-58.localtunnel.me/messages?chatterId=${chatterId}`)
+const fetchMessages = chatterId => fetch(`${server}/messages?chatterId=${chatterId}`)
   .then(response => response.json())
   .then(data => data)
 
